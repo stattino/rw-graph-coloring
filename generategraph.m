@@ -4,6 +4,8 @@ function [ AdjMat ] = generategraph( N,c )
 % 2. Creates an edge with probability c/N between every pair of vertices.
 % c>1.
 AdjMat = rand(N,N);
+U = triu(AdjMat,1);
+AdjMat = U + U' + diag(diag(AdjMat));
 AdjMat = real(AdjMat < c/N);
 end
 
