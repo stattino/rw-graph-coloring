@@ -1,5 +1,5 @@
-function [ AdjMat ] = generategraph( N,c )
-%GENERATEGRAPH generates a random Erdös-Rényi graph with N vertices and density c
+function AdjMat = generategraph( N,c )
+%GENERATEGRAPH(N,c) generates a random Erdös-Rényi graph with N vertices and density c
 % 1. Generates N independent vertices
 % 2. Creates an edge with probability c/N between every pair of vertices.
 % c>1.
