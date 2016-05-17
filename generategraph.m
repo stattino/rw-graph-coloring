@@ -5,7 +5,7 @@ function AdjMat = generategraph( N,c )
 % c>1.
 AdjMat = rand(N,N);
 U = triu(AdjMat,1);
-AdjMat = U + U' + diag(diag(AdjMat));
+AdjMat = U + U' + eye(N);%+ diag(diag(AdjMat));
 AdjMat = real(AdjMat < c/N);
 end
 
