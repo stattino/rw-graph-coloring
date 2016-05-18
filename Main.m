@@ -24,7 +24,9 @@ V = randi(q,N,1);
 % set vector to intialization values
 x = V;
 Hamil_time = zeros(1,n);
+Temp_time = zeros(1,n);
 old_H = Hamiltonian(G,x);
+T = old_H
 for k = 1:n
     % Heuristics for simulated annealing
     if mod(k,dt) == 0 
@@ -36,7 +38,12 @@ for k = 1:n
     Hamil_time(k) = old_H + delta;
     %fprintf('iteration %d, delta = %d \n',k,delta);
     old_H = Hamil_time(k);
-    plot(Hamil_time(1:k))
+    figure(1)
+    plot(Hamil_time(1:k),'b')
+    hold on
+    axis([0,n,0,max(Hamil_time)])
+    Temp_time(k) = T;
+    plot(Temp_time(1:k),'r')
     axis([0,n,0,max(Hamil_time)])
     drawnow
 end
