@@ -4,8 +4,8 @@ function H = Hamiltonian( G, x )
 %   x   (N x 1) color vector for vertices
 [N, ~] = size(x);
 X_mat = repmat(x,1,N);
-X_bool = real(X_mat' == X_mat);
-X = X_bool .* G;
-H = sum(sum(X))/2;
+X_bool = real(X_mat' == X_mat); % Compare simultaneous all colors with all others
+X = X_bool .* G;                % Remove all non-connected contributions
+H = sum(sum(X))/2; 
 end
 

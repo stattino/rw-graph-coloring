@@ -1,5 +1,6 @@
 function [ Hmin, nrIterations ] = runMetopolis( data )
-%runMetopolis 
+%runMetopolis(data) Returns the minimum hamiltonian and the nrIterations. Breaks
+%at H = 0. Data is a struct
 %   data contains the following fields
 %   data.G - a neighbourhood graph
 %   data.q - nr of colors
@@ -9,7 +10,7 @@ function [ Hmin, nrIterations ] = runMetopolis( data )
 G = data.G;
 q = data.q;
 n = data.n;
-dt = 70;
+dt = 50;
 
 
 if data.temp == 1
