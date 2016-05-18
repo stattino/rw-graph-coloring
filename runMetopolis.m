@@ -12,7 +12,7 @@ n = data.n;
 dt = 70;
 
 
-if data.tempscheldule == 1
+if data.temp == 1
     alpha = 100;
     tempschedule = 1./(1 + alpha*log((1:n)));
 else
