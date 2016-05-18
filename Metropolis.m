@@ -1,4 +1,4 @@
-function x_new = Metropolis( x, q, G, Beta, old_H )
+function [x_new, delta] = Metropolis( x, q, G, Beta, old_H )
 %METROPOLIS(x,q,G,Beta) performs a metropolis algorithm iteration. 
 %   Performs a metropolis iteration with hamiltonian defined in the
 %   Hamiltonian help function. See Hamiltonian for more.
@@ -13,6 +13,8 @@ function x_new = Metropolis( x, q, G, Beta, old_H )
         x = x_new;
     elseif ( rand < exp(-Beta*delta) )
         x = x_new;
+    else
+        delta = 0;
     end
     x_new = x;
 end
