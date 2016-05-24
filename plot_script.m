@@ -2,8 +2,9 @@
 
 % Some selected colors, and a c-range that makes them interesting for a 
 % 400 x 400 graph.
+load('plot_res','cvec');
 q_vec = [3,5,7];
-c_vec = logspace(0,log10(16),10)+0.01;
+c_vec = cvec;%[13,18,20,24];% logspace(0,log10(16),10)+0.01;
 N = 400;
 
 Hmin_res = zeros(length(q_vec),length(c_vec));

@@ -8,7 +8,7 @@ clc;clearvars;close all;
 N = 400;
 c = 5;
 q = 5;
-n = 30000;
+n = 5000;
 dt = 50;
 % Generate graph and intialise vertices to random colors
 G = generategraph(N,c);
@@ -19,7 +19,7 @@ Hamil_time = zeros(1,n); Temp_time = zeros(1,n);
 old_H = Hamiltonian(G,x);
 
 % Choose a heuristic for temperature cooling
-gamma = 0;
+gamma = 0.01;
 alpha = 700; y = linspace(1,100,n);
 tempschedule = 1./(1 + alpha*log((1:n)));
 tempschedule = gamma*(1./2*(1 - tanh((y./10)))) + (1-gamma)*tempschedule;
@@ -52,6 +52,6 @@ for k = 1:n
 %     axis([0,n,0,max(Hamil_time)])
 %     drawnow
 end
-plot(Hamil_time, 'b'); hold on
-handel = plot(Temp_time(1:k),'b--');
+plot(Hamil_time, 'g'); hold on
+handel = plot(Temp_time(1:k),'g--');
 axis([0,n,0, max(Hamil_time)+20])

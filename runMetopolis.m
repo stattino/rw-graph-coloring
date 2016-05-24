@@ -14,7 +14,7 @@ dt = 50;
 
 
 if data.temp == 1
-    alpha = 100;
+    alpha = 700;
     tempschedule = 1./(1 + alpha*log((1:n)));
 else
     linsp = linspace(1,100,n);
