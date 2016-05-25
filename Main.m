@@ -19,7 +19,7 @@ Hamil_time = zeros(1,n); Temp_time = zeros(1,n);
 old_H = Hamiltonian(G,x);
 
 % Choose a heuristic for temperature cooling
-gamma = 0.01;
+gamma = 0; %choose 
 alpha = 700; y = linspace(1,100,n);
 tempschedule = 1./(1 + alpha*log((1:n)));
 tempschedule = gamma*(1./2*(1 - tanh((y./10)))) + (1-gamma)*tempschedule;

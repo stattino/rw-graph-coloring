@@ -7,10 +7,10 @@ function [ Hmin, nrIterations ] = runMetopolis( data )
 %   data.n - maximal nr of iterations
 %   data.xinit - initial state
 
-G = data.G;
-q = data.q;
-n = data.n;
-dt = 50;
+G = data.G; %data graph
+q = data.q; %number of colors
+n = data.n; % t_{max}
+dt = 50; %number of time steps with constant temperature
 
 
 if data.temp == 1
