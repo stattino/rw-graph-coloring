@@ -6,13 +6,21 @@ clc;clearvars;close all;
 % q - number of colors
 % n - no. of iterations
 N = 400;
-c = 5;
+c = 20;
 q = 5;
 n = 5000;
 dt = 50;
 % Generate graph and intialise vertices to random colors
 G = generategraph(N,c);
 x = randi(q,N,1);
+initTscalefactor = 1;
+
+% load other data
+% exdata = load('Best_result.mat');
+% x = exdata.xmin;
+% old_Hmin = exdata.Hmin;
+% G = exdata.G;
+% initTscalefactor = 0.01;
 
 % Vectors for plotting material, set initial hamiltonian
 Hamil_time = zeros(1,n); Temp_time = zeros(1,n);
@@ -24,12 +32,14 @@ alpha = 700; y = linspace(1,100,n);
 tempschedule = 1./(1 + alpha*log((1:n)));
 tempschedule = gamma*(1./2*(1 - tanh((y./10)))) + (1-gamma)*tempschedule;
 
-tempschedule = tempschedule* old_H;
+tempschedule = tempschedule* old_H * initTscalefactor;
 
 % T is set to initial error
 % (Beta - intial inverse temperature)
-T = old_H;
+T = old_H*initTscalefactor;
 Beta = 1/T;
+Hmin = old_H;
+xmin = x;
 for k = 1:n
     % Change in temperature when k%dt=0
     if mod(k,dt) == 0 
@@ -43,6 +53,16 @@ for k = 1:n
     Hamil_time(k) = old_H + delta;
     old_H = Hamil_time(k);
     Temp_time(k) = T;
+    if old_H < Hmin
+        Hmin = old_H;
+        xmin = x;
+    end
+    
+    if mod(k,1000) == 0
+        fprintf('Saving best results...');
+        save('Best_result.mat','Hmin','xmin','G')
+        fprintf('done!\n\n');
+    end
 
     % Uncomment for continuous plotting
 %     plot(Hamil_time(1:k),'b')
@@ -52,6 +72,6 @@ for k = 1:n
 %     axis([0,n,0,max(Hamil_time)])
 %     drawnow
 end
-plot(Hamil_time, 'g'); hold on
-handel = plot(Temp_time(1:k),'g--');
+plot(Hamil_time, 'b'); hold on
+handel = plot(Temp_time(1:k),'b--');
 axis([0,n,0, max(Hamil_time)+20])
