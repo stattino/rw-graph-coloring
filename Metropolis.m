@@ -7,8 +7,14 @@ function [x_new, delta] = Metropolis( x, q, G, Beta, old_H )
 
     [N,~] = size(x);
     x_new = x;
-    x_new(randi(N)) = randi(q); % Choose one vertice to change to a random colour
-    delta = dH(G,x_new,old_H);
+    inxX = randi(N);
+    x_new(inxX) = randi(q); % Choose one vertice to change to a random colour
+    xnewvalue = x_new(inxX);
+    delta = dH2(G, xnewvalue, x, inxX);
+    %delta = dH(G, x_new, old_H);
+%     if delta2 ~= delta
+%         disp('AHAHHAHHHHAHHA');
+%     end
     if (delta <= 0 ) 
         x = x_new;
     elseif ( rand < exp(-Beta*delta) )
